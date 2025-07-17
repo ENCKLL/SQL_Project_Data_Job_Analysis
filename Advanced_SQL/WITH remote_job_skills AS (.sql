@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 WITH remote_job_skills AS (
     SELECT
         skill_id,
@@ -20,4 +21,28 @@ SELECT
 FROM
     remote_job_skills
 INNER JOIN skills_dim AS skills 
+=======
+WITH remote_job_skills AS (
+    SELECT
+        skill_id,
+        COUNT(*) AS skill_count
+    FROM
+        skills_job_dim AS skills_to_job
+    INNER JOIN job_postings_fact AS job_postings 
+        ON job_postings.job_id = skills_to_job.job_id
+    WHERE
+        job_postings.job_work_from_home = TRUE
+    GROUP BY
+        skill_id
+)
+
+SELECT
+    skills.skill_id,
+    skills AS skill_name,
+    skill_count
+    remote_job_skills.skill_count
+FROM
+    remote_job_skills
+INNER JOIN skills_dim AS skills 
+>>>>>>> 7988f069fab5616c14257e90e402c5f951f9c6d5
     ON skills.skill_id = remote_job_skills.skill_id;
