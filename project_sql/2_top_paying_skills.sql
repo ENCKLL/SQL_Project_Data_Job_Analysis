@@ -36,7 +36,6 @@ ON s.job_id = top_paying_jobs.job_id
 INNER JOIN skills_dim
 ON skills_dim.skill_id = s.skill_id
 ORDER BY salary_year_avg DESC
-LIMIT 10;
 
 
 /*
